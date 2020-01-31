@@ -1,6 +1,6 @@
 @name Orbiter
 @inputs 
-@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma U V W
+@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma U V W B2 B3
 @persist 
 @trigger 
 
@@ -17,6 +17,9 @@ A = 5
 
 # Second holo count
 B = A + 1
+B2 = B + 1
+B3 = B2 + 1
+
 
 if (first()) {  
 
@@ -29,7 +32,7 @@ if (first()) {
         Green = random(255)+100
         Blue = random(150)+100
         
-        # First holo
+        # First holo - Orbit on player position
         holoCreate(I)
         
         holoModel(I, "icosphere3")
@@ -39,15 +42,37 @@ if (first()) {
         
         holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255)
         
-        # Second holo
+        # Second holo - Orbit on first holo
         holoCreate(I+B)
         
-        holoModel(I+B, "icosphere3")
+        holoModel(I+B, "torus3")
         holoScale(I+B, vec(S-S/2, S-S/2, S-S/2))
         holoAlpha(I+B, 60)
         holoColor(I+B, vec(Red, Green, Blue))
         
-        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(Red, Green, Blue), 255)
+        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(255, 0, 0), 255)
+
+        # Third holo - Orbit on first holo
+        holoCreate(I+B2)
+        
+        holoModel(I+B2, "torus3")
+        holoScale(I+B2, vec(S-S/2, S-S/2, S-S/2))
+        holoAlpha(I+B2, 60)
+        holoColor(I+B2, vec(Red, Green, Blue))
+        
+        holoEntity(I+B2):setTrails(2, 0, 0.4, "trails/physbeam", vec(0, Green, 0), 255)
+
+        # Fourth holo - Orbit on first holo
+        holoCreate(I+B3)
+        
+        holoModel(I+B3, "torus3")
+        holoScale(I+B3, vec(S-S/2, S-S/2, S-S/2))
+        holoAlpha(I+B3, 60)
+        holoColor(I+B3, vec(Red, Green, Blue))
+        
+        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(0, 0, Blue), 255)
+
+        
         
     }
 
@@ -75,6 +100,8 @@ function void spinHolo() {
     for (I = 1, A) {
         
         holoAng(I+B, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
+        holoAng(I+B2, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
+        holoAng(I+B3, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
             
     }
 
@@ -86,6 +113,8 @@ function void rotate() {
     
         holoPos(I, O:pos() + vec( cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10 ))
         holoPos(I+B, holoEntity(I):pos() + vec( cos(U)*(D-45), sin(V)*(D-45), cos(W)*(D-45) ))
+        holoPos(I+B2, holoEntity(I):pos() + vec( cos(U + I*120)*(D-45), sin(V + I*120)*(D-45), cos(W + I*120)*(D-45) ))
+        holoPos(I+B3, holoEntity(I):pos() + vec( cos(U + I*240)*(D-45), sin(V + I*240)*(D-45), cos(W + I*240)*(D-45) ))
         spinHolo()
     
     }
@@ -98,6 +127,8 @@ if ( O:inNoclip() & !changed(O:pos()) ) {
     
         holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
         holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0))
+        holoPos(I+B2, holoEntity(I):pos() + vec(0, 0, 0))
+        holoPos(I+B3, holoEntity(I):pos() + vec(0, 0, 0))
         spinHolo()
     
     }
@@ -122,6 +153,8 @@ else {
         
         holoPos(I, O:pos() + vec( cos(X + I*500)*(D-40), -30, 70 + sin(Y + I*500)*(D-40) ):rotate(ang(0, O:angles():yaw()+-90, 0)))
         holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        holoPos(I+B2, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        holoPos(I+B3, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
         spinHolo()
         #holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
         
