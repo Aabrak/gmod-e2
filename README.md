@@ -1,1 +1,1 @@
-# gmod-e2
+# Garry's Mod - Expression2
