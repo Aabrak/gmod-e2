@@ -1,6 +1,6 @@
 @name Orbiter
 @inputs 
-@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma
+@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma U V W
 @persist 
 @trigger 
 
@@ -9,13 +9,18 @@
 #if (A > 80) {A = 1}
 #A+=5
 
+# Size of holos
 S = 0.5
 
+# Holo count
 A = 5
-B = A+1
+
+# Second holo count
+B = A + 1
 
 if (first()) {  
-    
+
+    # Executes all but if(first()) with a default latency of 15ms, see documentation for more informtaion
     runOnTick(1)
     
     for(I = 1, A) {
@@ -32,29 +37,20 @@ if (first()) {
         holoAlpha(I, 250)
         holoColor(I, vec(0, 0, 0))
         
-        # Not sure if having 2 trail effects works
         holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255)
-        holoEntity(I):setTrails(4, 0, 1, "trails/plasma", vec(Red, Green, Blue), 255) 
         
         # Second holo
         holoCreate(I+B)
         
-        holoModel(I+B, "torus3")
-        holoScale(I+B, vec(S+S, S+S, S+S))
-        holoAlpha(I+B, 50)
+        holoModel(I+B, "icosphere3")
+        holoScale(I+B, vec(S-S/2, S-S/2, S-S/2))
+        holoAlpha(I+B, 60)
         holoColor(I+B, vec(Red, Green, Blue))
         
+        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(Red, Green, Blue), 255)
+        
     }
-    
-    #holoAlpha(1, 0)
-    
-    #holoModel(1, "icosphere3")
-    #holoScale(1, vec(S, S, S))
-    #holoAlpha(1, 220)
-    #holoColor(1, vec(0, 0, 0))
-    
-    #holoEntity(1):setTrails(5, 0, 0.5,"trails/smoke", vec(100, 0, 0), 255)
-    
+
     O = owner()
     X = 0
     Y = 0
@@ -88,8 +84,8 @@ function void rotate() {
     
     for (I = 1, A) {
     
-        holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10))
-        holoPos(I+B, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10))
+        holoPos(I, O:pos() + vec( cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10 ))
+        holoPos(I+B, holoEntity(I):pos() + vec( cos(U)*(D-45), sin(V)*(D-45), cos(W)*(D-45) ))
         spinHolo()
     
     }
@@ -101,7 +97,7 @@ if ( O:inNoclip() & !changed(O:pos()) ) {
     for (I = 1, A) {
     
         holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
-        holoPos(I+B, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
+        holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0))
         spinHolo()
     
     }
@@ -120,30 +116,24 @@ elseif (O:isCrouch() & !changed(O:pos())) {
     
 }
 
-#elseif (O:keyPressed("D")) {
-    
-    #holoEntity(1):setTrails(5, 0, 3,"trails/smoke", vec(255, 0, 100), 255)
-    
-#}
-
-#elseif (O:keyPressed("A")) {
-    
-    #holoEntity(1):setTrails(5, 0, 3,"trails/smoke", vec(0, 200, 255), 255)
-    
-#}
-
 else {
 
     for (I = 1, A) {
         
-        holoPos(I, O:pos() + vec( cos(0 + I*500)*(D-40), -30, 70 + sin(0 + I*500)*(D-40)):rotate(ang(0, O:angles():yaw()+-90, 0)))
-        holoPos(I+B, O:pos() + vec( cos(0 + I*500)*(D-40), -30, 70 + sin(0 + I*500)*(D-40)):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        holoPos(I, O:pos() + vec( cos(X + I*500)*(D-40), -30, 70 + sin(Y + I*500)*(D-40) ):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
         spinHolo()
         #holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
         
     }
     
 }
+
+# Value increments for rotation based on M which is the distance it goes
+# So in other words speed, also Ma is ang speed
+U+=M+5
+V+=M+5
+W+=M+5
 
 X+=M
 Y+=M
