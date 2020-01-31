@@ -32,7 +32,9 @@ if (first()) {
         holoAlpha(I, 250)
         holoColor(I, vec(0, 0, 0))
         
-        holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255) 
+        # Not sure if having 2 trail effects works
+        holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255)
+        holoEntity(I):setTrails(4, 0, 1, "trails/plasma", vec(Red, Green, Blue), 255) 
         
         # Second holo
         holoCreate(I+B)
