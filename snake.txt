@@ -1,0 +1,191 @@
+@name Psygun
+@inputs 
+@outputs SR:string 
+@persist Turn
+@trigger 
+interval(100)
+PosC = owner():attachmentPos("chest")
+AngC = owner():attachmentAng("chest")
+PosR = owner():attachmentPos("anim_attachment_RH")
+AngR = owner():attachmentAng("anim_attachment_RH")
+if (first()) {
+
+#### COLOR OPTIONS
+Red = 0
+Green = 255
+Blue = 255
+
+PosL = owner():attachmentPos("anim_attachment_LH")
+AngL = owner():attachmentAng("anim_attachment_LH")
+
+
+holoAlpha(0,200)
+
+
+holoCreate(1,holoEntity(100):toWorld(vec(10,0,0)),vec(0.2,0.2,2),holoEntity(100):toWorld(ang(0,0,0)),vec(100,100,100),"hqtorus2")
+holoParentAttachment(1,owner(),"anim_attachment_RH")
+
+holoCreate(2,holoEntity(1):toWorld(vec(7.5,7,5)),vec(0.15,0.15,0.4),holoEntity(1):toWorld(ang(90,90,0)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(2,1)
+
+holoCreate(3,holoEntity(2):toWorld(vec(0,0,-5)),vec(0.4,0.4,0.5),holoEntity(2):toWorld(ang(0,0,0)),vec(100,100,100),"hqcylinder2")
+holoParent(3,1)
+
+holoCreate(4,holoEntity(1):toWorld(vec(2,-0.7,2)),vec(0.3,0.3,0.5),holoEntity(1):toWorld(ang(80,-15,0)),vec(100,100,100),"hqcylinder2")
+holoParent(4,1)
+
+holoCreate(5,holoEntity(1):toWorld(vec(7,-2,4)),vec(0.7,0.7,1),holoEntity(1):toWorld(ang(80,-15,0)),vec(Red,Green,Blue),"hqicosphere2")
+holoParent(5,1)
+holoClipEnabled(5,1)
+holoClip(5,vec(0,0,2),vec(0,0,-1),0)
+
+holoCreate(6,holoEntity(1):toWorld(vec(9,-2.5,4.3)),vec(0.7,0.7,0.2),holoEntity(1):toWorld(ang(80,-15,0)),vec(100,100,100),"hqcylinder2")
+holoParent(6,1)
+
+holoCreate(7,holoEntity(6):toWorld(vec(0,0,5)),vec(0.4,0.4,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(255,255,255),"hqcylinder2")
+holoParent(7,1)
+holoMaterial(7,"models/props_combine/combine_monitorbay_disp")
+
+holoCreate(8,holoEntity(6):toWorld(vec(0,0,5)),vec(0.55,0.55,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(100,100,100),"hqcylinder2")
+holoParent(8,1)
+holoMaterial(8,"models/props_combine/stasisshield_sheet")
+
+holoCreate(9,holoEntity(6):toWorld(vec(3.5,0,5)),vec(0.1,0.1,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(9,8)
+
+holoCreate(10,holoEntity(6):toWorld(vec(-3.5,0,5)),vec(0.1,0.1,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(10,8)
+
+holoCreate(13,holoEntity(6):toWorld(vec(0,0,5)),vec(0.5,0.5,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(255,255,255),"hqcylinder2")
+holoParent(13,1)
+holoMaterial(13,"models/props_combine/stasisshield_sheet")
+
+holoCreate(14,holoEntity(6):toWorld(vec(3.5,0,5)),vec(0.1,0.1,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(14,13)
+
+holoCreate(15,holoEntity(6):toWorld(vec(-3.5,0,5)),vec(0.1,0.1,0.67),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(15,13)
+
+holoCreate(11,holoEntity(6):toWorld(vec(0,-3,-2)),vec(0.4,0.4,0.3),holoEntity(6):toWorld(ang(0,0,90)),vec(100,100,100),"hqcylinder2")
+holoParent(11,1)
+
+holoCreate(12,holoEntity(6):toWorld(vec(0,-5.8,-2)),vec(0.5,0.5,0.2),holoEntity(6):toWorld(ang(0,0,90)),vec(Red,Green,Blue),"hqcylinder2")
+holoParent(12,1)
+
+holoCreate(16,holoEntity(6):toWorld(vec(0,0,9)),vec(0.7,0.7,0.1),holoEntity(6):toWorld(ang(0,0,0)),vec(100,100,100),"hqcylinder2")
+holoParent(16,1)
+
+holoCreate(17,holoEntity(6):toWorld(vec(0,0,9.5)),vec(0.5,0.5,0.2),holoEntity(6):toWorld(ang(0,0,0)),vec(255,255,255),"hqtorus2")
+holoParent(17,1)
+holoMaterial(17,"models/props_combine/stasisshield_sheet") 
+
+holoCreate(18,holoEntity(6):toWorld(vec(0,0,9.5)),vec(0.5,0.5,0.5),holoEntity(6):toWorld(ang(0,0,0)),vec(255,255,255),"hqicosphere2")
+holoParent(18,1)
+holoMaterial(18,"models/alyx/emptool_glow")
+
+holoCreate(19,holoEntity(6):toWorld(vec(0,0,9.5)),vec(0.3,0.3,0.1),holoEntity(6):toWorld(ang(0,0,0)),vec(255,255,255),"hqcylinder2")
+holoParent(19,1)
+holoMaterial(19,"models/props_combine/stasisshield_sheet")
+
+holoCreate(20,holoEntity(6):toWorld(vec(-4.3,0,9.6)),vec(0.1,0.1,0.2),holoEntity(6):toWorld(ang(-45,0,0)),vec(Red,Green,Blue),"cube")
+holoParent(20,19)
+
+holoCreate(21,holoEntity(6):toWorld(vec(-5,0,12.3)),vec(0.1,0.1,0.4),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"cube")
+holoParent(21,19)
+
+holoCreate(22,holoEntity(6):toWorld(vec(4.3,0,9.6)),vec(0.1,0.1,0.2),holoEntity(6):toWorld(ang(45,0,0)),vec(Red,Green,Blue),"cube")
+holoParent(22,19)
+
+holoCreate(23,holoEntity(6):toWorld(vec(5,0,12.3)),vec(0.1,0.1,0.4),holoEntity(6):toWorld(ang(0,0,0)),vec(Red,Green,Blue),"cube")
+holoParent(23,19)
+#
+holoCreate(24,holoEntity(6):toWorld(vec(0,4.5,9.6)),vec(0.1,0.1,0.2),holoEntity(6):toWorld(ang(45,90,0)),vec(Red,Green,Blue),"cube")
+holoParent(24,19)
+
+holoCreate(25,holoEntity(6):toWorld(vec(0,5.2,12.3)),vec(0.1,0.1,0.4),holoEntity(6):toWorld(ang(0,90,0)),vec(Red,Green,Blue),"cube")
+holoParent(25,19)
+
+holoCreate(26,holoEntity(6):toWorld(vec(0,-4.5,9.6)),vec(0.1,0.1,0.2),holoEntity(6):toWorld(ang(-45,90,0)),vec(Red,Green,Blue),"cube")
+holoParent(26,19)
+
+holoCreate(27,holoEntity(6):toWorld(vec(0,-5.2,12.3)),vec(0.1,0.1,0.4),holoEntity(6):toWorld(ang(0,90,0)),vec(Red,Green,Blue),"cube")
+holoParent(27,19)
+
+holoCreate(28,holoEntity(6):toWorld(vec(0,-5.8,-2)),vec(0.3,0.3,0.5),holoEntity(6):toWorld(ang(0,0,90)),vec(255,255,255),"hqcylinder2")
+holoParent(28,1)
+holoMaterial(28,"models/alyx/emptool_glow")
+
+holoCreate(29,holoEntity(28):toWorld(vec(0,0,3.5)),vec(0.3,0.3,0.1),holoEntity(6):toWorld(ang(0,0,90)),vec(100,100,100),"hqcylinder2")
+holoParent(29,1)
+
+holoCreate(30,holoEntity(6):toWorld(vec(0,-5.8,-2)),vec(0.2,0.2,0.5),holoEntity(6):toWorld(ang(0,0,90)),vec(255,255,255),"hqcylinder2")
+holoParent(30,1)
+holoMaterial(30,"models/props_combine/stasisshield_sheet")
+holoMaterial(1,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(2,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(3,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(4,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(5,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(6,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(9,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(10,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(11,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(12,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(14,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(15,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(16,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(20,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(21,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(22,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(23,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(24,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(25,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(26,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(27,"phoenix_storms/mat/mat_phx_metallic2")
+holoMaterial(29,"phoenix_storms/mat/mat_phx_metallic2")
+
+
+
+
+}
+holoCreate(0,PosC,vec(0.2,0.2,2),AngC,vec(100,100,100),"hqtorus2")
+holoParentAttachment(0,owner(),"chest")
+holoAlpha(0,0)
+
+Pos = owner():attachmentPos("anim_attachment_RH")
+Ang = owner():attachmentAng("anim_attachment_RH")
+
+
+if (changed(owner():weapon():type())|changed(owner():inVehicle())) {
+if (owner():weapon():type()!="weapon_physgun") {
+holoPos(1,holoEntity(0):toWorld(vec(-8,0,-10)))
+holoAng(1,holoEntity(0):toWorld(ang(-80,0,0)))
+holoParent(1,0)
+
+}
+if (owner():weapon():type()=="weapon_physgun") {
+owner():weapon():setAlpha(0)
+holoPos(1,Pos)
+holoAng(1,Ang)
+holoParentAttachment(1,owner(),"anim_attachment_RH")
+
+}}
+
+holoAng(7,holoEntity(6):toWorld(ang(0,Turn,0)))
+if (owner():keyAttack1()&owner():weapon():type()=="weapon_physgun") {
+holoAng(8,holoEntity(6):toWorld(ang(0,Turn*500,0)))
+holoAng(13,holoEntity(6):toWorld(ang(0,-Turn*500,0)))
+holoAng(19,holoEntity(6):toWorld(ang(0,-Turn*50,0)))
+holoAlpha(18,255)
+} else {
+holoAng(8,holoEntity(6):toWorld(ang(0,Turn*40,0)))
+holoAng(13,holoEntity(6):toWorld(ang(0,-Turn*40,0)))
+holoAng(19,holoEntity(6):toWorld(ang(0,-Turn*10,0)))
+holoAlpha(18,0)
+}
+
+if (owner():weapon():type()!="weapon_physgun") {
+Turn = 0
+} else {
+Turn = Turn + 1
+}

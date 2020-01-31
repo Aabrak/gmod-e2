@@ -1,0 +1,45 @@
+@name Lighto
+@outputs A B C Scale
+#@outputs A:vector2 B:vector C:vector4 W X Y 
+
+
+#B = vec(100,50,25)
+
+#X = B:x()
+#Y = B:y()
+#Z = B:z()
+
+#print(B:toString())
+
+
+# Initiating variables
+
+if (Scale > 2) {Scale = 2}
+Scale++
+
+if (B > 5) {B = 1}
+B++ 
+
+for(I = 1, 5) {
+    
+    # Creation of entity    
+    holoCreate(I)
+    holoModel(I, "icosphere2")
+    holoScale(I, vec(Scale, Scale, Scale)) #vec(I*2, I*2, I))
+    holoColor(I, vec(100+random(100), 0, random(100)))
+    
+    # Position of entity
+    holoPos(I, owner():aimPos() + vec(random(5), random(5), I+B) * (2*I))
+}
+
+#A = 1
+
+#for(I = 1, 100) {
+#    if (A > 30) {
+#        A = 1
+#    }
+#    holoPos(10, entity():pos() + vec(0, 0, A))
+#    A++
+#}
+interval(100)
+

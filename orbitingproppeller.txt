@@ -1,0 +1,58 @@
+@outputs [Vec Vec2 Vec3 Vec4 Vec5]:vector [Ent Ent2 Ent3 Ent4 Ent5]:entity X Count
+
+if(first()|duped()){
+    runOnTick(1)
+    findByModel("models/hunter/blocks/cube05x05x05.mdl")    
+    Ent = findResult(1)
+    Ent2 = findResult(2)
+    Ent3 = findResult(3)
+    Ent4 = findResult(4)
+    Ent5 = findResult(5)
+}
+
+#interval(10)
+
+Count = 5
+
+X*1000
+
+if (owner():keyPressed("R")) {
+    
+    #for(I = 1, Count) {
+        
+        VecThrow = (owner():aimPos()-Ent:pos())
+        VecThrow2 = (owner():aimPos()-Ent2:pos())
+        VecThrow3 = (owner():aimPos()-Ent3:pos())
+        VecThrow4 = (owner():aimPos()-Ent4:pos())
+        VecThrow5 = (owner():aimPos()-Ent5:pos())
+    
+        Ent:applyForce(VecThrow+$VecThrow*5)   
+        Ent2:applyForce(VecThrow2+$VecThrow2*5)   
+        Ent3:applyForce(VecThrow3+$VecThrow3*5)   
+        Ent4:applyForce(VecThrow4+$VecThrow4*5)   
+        Ent5:applyForce(VecThrow5+$VecThrow5*5)    
+        
+    #}
+      
+    
+}
+
+else {
+    
+    #for (I = 1, Count) {
+        Vec = (owner():pos()-Ent:pos()+vec(   120*cos(X),       120*sin(X),      120))*10
+        Vec2 = (owner():pos()-Ent2:pos()+vec( 120*cos(X+72),   120*sin(X+72),      120))*10
+        Vec3 = (owner():pos()-Ent3:pos()+vec( 120*cos(X+144),   120*sin(X+144),      120))*10
+        Vec4 = (owner():pos()-Ent4:pos()+vec( 120*cos(X+216),   120*sin(X+216),      120))*10
+        Vec5 = (owner():pos()-Ent5:pos()+vec( 120*cos(X+288),   120*sin(X+288),      120))*10
+        
+        Ent:applyForce(Vec+$Vec*5)
+        Ent2:applyForce(Vec2+$Vec2*5)
+        Ent3:applyForce(Vec3+$Vec3*5)
+        Ent4:applyForce(Vec4+$Vec4*5)
+        Ent5:applyForce(Vec5+$Vec5*5) 
+    #}
+}
+
+
+X++

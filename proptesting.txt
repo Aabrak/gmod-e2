@@ -1,0 +1,39 @@
+@name propTesting
+@inputs 
+@outputs Target:entity
+@persist 
+@trigger 
+
+if(first()) {
+    runOnTick(1)
+        holoCreate(1)
+        holoModel(1, "icosphere3")
+        holoScale(1, vec(5, 5, 5))
+        holoAlpha(1, 0)
+        holoColor(1, vec(0, 0, 0))
+        
+        holoPos(1, Dam:pos() + vec(0, 0, 150))
+        
+        holoEntity(1):setTrails(500, 100, 0.5, "trails/physbeam", vec(random(255)+100, random(255)+100, random(255)+100), 255) 
+    }
+
+findPlayerByName("Wavundyrei Alcaranar")
+D = findResult(1)
+S = owner()
+
+findByClass("npc_zombie")
+Z = find()
+
+Model = "models/props_wasteland/cargo_container01.mdl"  
+
+Distance = 1
+
+holoPos(1, holoPos(1, Dam:pos() + vec(0, 0, 150)))
+
+#propSpawn(Model, D:aimPos() + vec(0, 0, 1500), ang(vec(0, 0, 90)), 0)
+
+#Ent1 = entity():isWeldedTo() #findByModel("models/props_wasteland/cargo_container01.mdl")
+
+#Vec1 = (owner():aimPos()-Ent1:pos())*10
+
+#Ent1:applyForce(Vec1+$Vec1*5)

@@ -1,0 +1,9 @@
+@name rand1
+@inputs Screen:wirelink
+
+findByName("Wavundyrei Alcaranar")
+
+Target = findResult(1)
+
+Screen:writeString(Target:health())
+

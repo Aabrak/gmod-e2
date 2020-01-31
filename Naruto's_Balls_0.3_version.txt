@@ -1,0 +1,76 @@
+@name Naruto's Balls 0.3 version
+@inputs 
+@outputs 
+@persist 
+@trigger 
+runOnTick(1)
+if(first()){
+holoCreate(1,entity():pos()+vec(0,0,33),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(2,entity():pos()+vec(0,0,33),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(3,entity():pos()+vec(0,0,73),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(4,entity():pos()+vec(0,0,73),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(5,entity():pos()+vec(20,0,53),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(6,entity():pos()+vec(20,0,53),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(7,entity():pos()+vec(-20,0,53),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(8,entity():pos()+vec(-20,0,53),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(9,entity():pos()+vec(-12,0,40),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(10,entity():pos()+vec(-12,0,40),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(11,entity():pos()+vec(-12,0,66),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(12,entity():pos()+vec(-12,0,66),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(13,entity():pos()+vec(12,0,66),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(14,entity():pos()+vec(12,0,66),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+holoCreate(15,entity():pos()+vec(12,0,40),vec(-0.5),ang(0),vec(50,0,50),"hqsphere")
+holoCreate(16,entity():pos()+vec(12,0,40),vec(-0.52 ),ang(0),vec(100,0,100),"hqsphere")
+
+holoDisableShading(2,1)
+holoDisableShading(4,1)
+holoDisableShading(6,1)
+holoDisableShading(8,1)
+holoDisableShading(10,1)
+holoDisableShading(12,1)
+holoDisableShading(14,1)
+holoDisableShading(16,1)
+
+}
+holoPos(1,owner():pos()+vec(0,-20,33):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(2,owner():pos()+vec(0,-20,33):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(3,owner():pos()+vec(0,-20,73):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(4,owner():pos()+vec(0,-20,73):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(5,owner():pos()+vec(20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(6,owner():pos()+vec(20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(7,owner():pos()+vec(-20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(8,owner():pos()+vec(-20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(9,owner():pos()+vec(-12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(10,owner():pos()+vec(-12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(11,owner():pos()+vec(-12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(12,owner():pos()+vec(-12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(13,owner():pos()+vec(12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(14,owner():pos()+vec(12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(15,owner():pos()+vec(12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(16,owner():pos()+vec(12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+if(owner():keyPressed("e")){
+
+holoPos(3,owner():aimPos()+vec(0,0,50):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(4,owner():aimPos()+vec(0,0,50):rotate(ang(0,owner():angles():yaw()+-90,0)))
+
+}
+
+if(owner():keyPressed("r")){
+
+holoPos(1,owner():aimPos()+vec(0,-20,33):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(2,owner():aimPos()+vec(0,-20,33):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(3,owner():aimPos()+vec(0,-20,73):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(4,owner():aimPos()+vec(0,-20,73):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(5,owner():aimPos()+vec(20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(6,owner():aimPos()+vec(20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(7,owner():aimPos()+vec(-20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(8,owner():aimPos()+vec(-20,-20,53):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(9,owner():aimPos()+vec(-12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(10,owner():aimPos()+vec(-12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(11,owner():aimPos()+vec(-12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(12,owner():aimPos()+vec(-12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(13,owner():aimPos()+vec(12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(14,owner():aimPos()+vec(12,-20,66):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(15,owner():aimPos()+vec(12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+holoPos(16,owner():aimPos()+vec(12,-20,40):rotate(ang(0,owner():angles():yaw()+-90,0)))
+}

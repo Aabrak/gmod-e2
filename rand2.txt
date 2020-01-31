@@ -1,0 +1,14 @@
+@name rand2
+@inputs A
+@outputs
+@persist 
+@trigger 
+
+interval(100)
+
+Effect = effect()
+Effect:setScale(1)
+Effect:setMagnitude(1)
+Effect:setRadius(1)
+Effect:setOrigin(entity():pos())
+Effect:play("AR2Impact")

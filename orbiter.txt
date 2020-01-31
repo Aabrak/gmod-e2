@@ -1,0 +1,149 @@
+@name Propircle
+@inputs 
+@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma
+@persist 
+@trigger 
+
+#runOnTick(1)
+
+#if (A > 80) {A = 1}
+#A+=5
+
+S = 0.5
+
+A = 5
+B = A+1
+
+if (first()) {  
+    
+    runOnTick(1)
+    
+    for(I = 1, A) {
+        
+        Red = 0
+        Green = random(255)+100
+        Blue = random(150)+100
+        
+        # First holo
+        holoCreate(I)
+        
+        holoModel(I, "icosphere3")
+        holoScale(I, vec(S, S, S))
+        holoAlpha(I, 250)
+        holoColor(I, vec(0, 0, 0))
+        
+        holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255) 
+        
+        # Second holo
+        holoCreate(I+B)
+        
+        holoModel(I+B, "torus3")
+        holoScale(I+B, vec(S+S, S+S, S+S))
+        holoAlpha(I+B, 50)
+        holoColor(I+B, vec(Red, Green, Blue))
+        
+    }
+    
+    #holoAlpha(1, 0)
+    
+    #holoModel(1, "icosphere3")
+    #holoScale(1, vec(S, S, S))
+    #holoAlpha(1, 220)
+    #holoColor(1, vec(0, 0, 0))
+    
+    #holoEntity(1):setTrails(5, 0, 0.5,"trails/smoke", vec(100, 0, 0), 255)
+    
+    O = owner()
+    X = 0
+    Y = 0
+    
+    # Speed & Self-rotation speed
+    M = 1
+    Ma = 1
+    
+    # Distance
+    D = 50
+    
+    # Height
+    H = 5
+    
+}
+
+# cos() is for X 
+# sin() is for Y
+
+function void spinHolo() {
+
+    for (I = 1, A) {
+        
+        holoAng(I+B, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
+            
+    }
+
+}
+
+function void rotate() {
+    
+    for (I = 1, A) {
+    
+        holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10))
+        holoPos(I+B, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10))
+        spinHolo()
+    
+    }
+    
+}
+
+if ( O:inNoclip() & !changed(O:pos()) ) {
+    
+    for (I = 1, A) {
+    
+        holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
+        holoPos(I+B, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
+        spinHolo()
+    
+    }
+    
+}
+
+elseif (!changed(O:pos())) {
+
+    rotate()
+
+}
+
+elseif (O:isCrouch() & !changed(O:pos())) {
+    
+    rotate()
+    
+}
+
+#elseif (O:keyPressed("D")) {
+    
+    #holoEntity(1):setTrails(5, 0, 3,"trails/smoke", vec(255, 0, 100), 255)
+    
+#}
+
+#elseif (O:keyPressed("A")) {
+    
+    #holoEntity(1):setTrails(5, 0, 3,"trails/smoke", vec(0, 200, 255), 255)
+    
+#}
+
+else {
+
+    for (I = 1, A) {
+        
+        holoPos(I, O:pos() + vec( cos(0 + I*500)*(D-40), -30, 70 + sin(0 + I*500)*(D-40)):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        holoPos(I+B, O:pos() + vec( cos(0 + I*500)*(D-40), -30, 70 + sin(0 + I*500)*(D-40)):rotate(ang(0, O:angles():yaw()+-90, 0)))
+        spinHolo()
+        #holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
+        
+    }
+    
+}
+
+X+=M
+Y+=M
+Ax+=Ma
+Ay+=Ma

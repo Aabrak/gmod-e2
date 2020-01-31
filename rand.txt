@@ -1,0 +1,13 @@
+@name rand1
+@inputs A
+@outputs
+@persist 
+@trigger 
+
+findByName("Wavundyrei Alcaranar")
+
+Target = findResult(1)
+
+if(Target:isNPC()) {
+    A = Target:health()
+}
