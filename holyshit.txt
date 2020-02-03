@@ -1,0 +1,54 @@
+@name holyshit
+@inputs 
+@outputs 
+@persist X Y M I J K T:entity
+@trigger 
+
+M = 5
+
+if (first()) {
+    
+        holoCreate(1)
+        holoScale(1, vec(1000, 1000, 5))
+        holoEntity(1):setTrails(1000, 1000, 10, "trails/smoke", vec(random(255), random(255), random(255)), 255)
+        holoModel(1, "torus")
+        holoMaterial(1, "models/wireframe")
+        runOnTick(1)
+    
+}
+
+T = findPlayerByName("Wavundyrei Alcaranar")
+
+# for (I = 1, 10) {
+#   holoPos(I, vec(I*500+cos(X*5000)*3000, 10000-I*1500+cos(X*1000)*1000, I*500+cos(X)*3000))
+#   holoAng(I, ang(vec(X, X+I*10, 0)))
+#   holoColor(I, vec(random(255), random(255), random(255)))
+# }
+
+
+
+#for (I = 1, 10) {
+    
+    for (J = 1, 10) {
+        
+        for (K = 1, 10) {
+            
+            # Code here
+            holoPos(1, owner():pos() + vec(0 + cos(X*10)*1000, 0 + sin(X*10)*1000, cos(X*1000)+100))
+        
+        }
+        
+    }
+    
+#}
+
+
+
+
+
+X+=M
+Y+=M
+
+
+
+

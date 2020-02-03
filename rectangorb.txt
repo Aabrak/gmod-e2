@@ -1,0 +1,120 @@
+@name rectangorb
+@inputs 
+@outputs 
+@persist Scale MakePlate MakeRotate P S H H2 D Thrown OgPos:vector Ranger:ranger
+@trigger 
+
+# First paste
+if ( first() ) {
+    
+    # Runtime
+    runOnTick(1)
+    
+    # Owner changes
+    owner():setMaterial("models/props_lab/warp_sheet")
+    owner():setColor(vec(0, 200, 0))
+    
+    # Values
+    Scale = 0.5
+    P = 10
+    S = 5
+    H = 50
+    H2 = 90
+    D = 40
+    Thrown = 0
+    AimPos = vec(0, 0, 0)
+    OgPos = vec(0, 0, 0)
+    
+    # MakePlate = 0
+    # MakeRotate = 1
+ 
+    # Main holo
+    holoCreate(1)
+    
+    # Functions
+    function void repos() { holoPos(1, owner():pos() + vec(0, 0, H)) }
+    function void rot() { holoPos(1, owner():pos() + vec( cos(P)*D, sin(P)*D, H )) }
+    function void defaultValues() {
+        holoColor(1, vec(0, 255, 0))
+        holoAlpha(1, 250)
+        holoMaterial(1, "yes")
+        holoModel(1, "icosphere")
+        holoScale(1, vec(Scale, Scale, Scale))
+        holoMaterial(1, "models/wireframe")
+        # holoEntity(1):setTrails(6, 0, 1, "trails/laser", vec(0, 255, 0), 255)
+        S = 5
+    } defaultValues()
+    function void makePlate() {
+        holoScale(1, vec(Scale, Scale, 0))
+        # holoPos(1, owner():pos() + vec(0, 0, H2))
+    }
+    function void selfRot() {
+        # holoPos(1, owner():pos() + vec( 0, 0, 40 + sin(P*2)*40 ))
+        holoAng(1, ang(vec( P, -(P*2), 0 )))
+    }
+    function void throw() {
+        holoPos(1, OgPos)
+    }
+    
+}
+
+# -- Mainline -- #
+
+# Animation values
+P += S-4
+
+
+# Animation functions   
+selfRot()
+
+holoScale(1, vec( cos(P)*2, cos(P)*2, cos(P)*2 ))
+
+if ( owner():keyPressed("R")) { 
+    Thrown = 1
+    OgPos = owner():pos()
+    AimPos = owner():aimPos()
+    Ranger = rangerOffset(128, AimPos, OgPos)
+}
+
+if ( Thrown == 1 ) {
+    holoPos(1, OgPos )
+}
+
+if ( Thrown == 0 ) {
+    rot()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#[
+
+    if ( MakeRotate == 1 ) { rot4te() }
+    
+    if( owner():keyPressed("A") ) {
+        MakePlate = 1
+        MakeRotate = 0
+    } if ( MakePlate == 1 ) { makePlate() }
+    
+    elseif ( owner():keyPressed("D") ) {
+        MakePlate = 0
+        MakeRotate = 1
+        defaultValues()
+    }
+    
+    # Keyboard related events
+    if ( owner():keyPressed("R") ) {
+        defaultValues()    
+    }
+
+]#

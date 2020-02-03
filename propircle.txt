@@ -1,7 +1,7 @@
 @name Orbiter
 @inputs 
-@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma U V W B2 B3
-@persist 
+@outputs A B C X Ax Y Ay Z M D H S O:entity Red Green Blue Ma U V W B2 B3 
+@persist CeilBool
 @trigger 
 
 #runOnTick(1)
@@ -13,7 +13,7 @@
 S = 0.5
 
 # Holo count
-A = 5
+A = 8
 
 # Second holo count
 B = A + 1
@@ -30,7 +30,7 @@ if (first()) {
         
         Red = 0
         Green = random(255)+100
-        Blue = random(150)+100
+        Blue = random(100)+100
         
         # First holo - Orbit on player position
         holoCreate(I)
@@ -38,7 +38,8 @@ if (first()) {
         holoModel(I, "icosphere3")
         holoScale(I, vec(S, S, S))
         holoAlpha(I, 250)
-        holoColor(I, vec(0, 0, 0))
+        holoColor(I, vec(Red, Green, Blue))
+        holoMaterial(I, "models/props_lab/warp_sheet")
         
         holoEntity(I):setTrails(8, 0, 0.5, "trails/physbeam", vec(Red, Green, Blue), 255)
         
@@ -46,33 +47,12 @@ if (first()) {
         holoCreate(I+B)
         
         holoModel(I+B, "torus3")
-        holoScale(I+B, vec(S-S/2, S-S/2, S-S/2))
-        holoAlpha(I+B, 60)
+        holoScale(I+B, vec(S+S, S+S, 0.7))
+        holoAlpha(I+B, 150)
         holoColor(I+B, vec(Red, Green, Blue))
+        holoMaterial(I+B, "models/props_lab/warp_sheet")
         
-        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(255, 0, 0), 255)
-
-        # Third holo - Orbit on first holo
-        holoCreate(I+B2)
-        
-        holoModel(I+B2, "torus3")
-        holoScale(I+B2, vec(S-S/2, S-S/2, S-S/2))
-        holoAlpha(I+B2, 60)
-        holoColor(I+B2, vec(Red, Green, Blue))
-        
-        holoEntity(I+B2):setTrails(2, 0, 0.4, "trails/physbeam", vec(0, Green, 0), 255)
-
-        # Fourth holo - Orbit on first holo
-        holoCreate(I+B3)
-        
-        holoModel(I+B3, "torus3")
-        holoScale(I+B3, vec(S-S/2, S-S/2, S-S/2))
-        holoAlpha(I+B3, 60)
-        holoColor(I+B3, vec(Red, Green, Blue))
-        
-        holoEntity(I+B):setTrails(2, 0, 0.4, "trails/physbeam", vec(0, 0, Blue), 255)
-
-        
+        holoEntity(I+B):setTrails(2, 0, 0.7, "trails/physbeam", vec(Red, Green, Blue), 255)        
         
     }
 
@@ -100,8 +80,6 @@ function void spinHolo() {
     for (I = 1, A) {
         
         holoAng(I+B, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
-        holoAng(I+B2, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
-        holoAng(I+B3, ang(vec(Ax+I*10, Ay+I*500, Ax+Ay+I*500)))
             
     }
 
@@ -112,9 +90,7 @@ function void rotate() {
     for (I = 1, A) {
     
         holoPos(I, O:pos() + vec( cos(X + I*500)*D, sin(Y + I*500)*D, H + I*10 ))
-        holoPos(I+B, holoEntity(I):pos() + vec( cos(U)*(D-45), sin(V)*(D-45), cos(W)*(D-45) ))
-        holoPos(I+B2, holoEntity(I):pos() + vec( cos(U + I*120)*(D-45), sin(V + I*120)*(D-45), cos(W + I*120)*(D-45) ))
-        holoPos(I+B3, holoEntity(I):pos() + vec( cos(U + I*240)*(D-45), sin(V + I*240)*(D-45), cos(W + I*240)*(D-45) ))
+        holoPos(I+B, holoEntity(I):pos() + vec( 0, 0, 0 ))
         spinHolo()
     
     }
@@ -127,8 +103,6 @@ if ( O:inNoclip() & !changed(O:pos()) ) {
     
         holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
         holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0))
-        holoPos(I+B2, holoEntity(I):pos() + vec(0, 0, 0))
-        holoPos(I+B3, holoEntity(I):pos() + vec(0, 0, 0))
         spinHolo()
     
     }
@@ -153,8 +127,6 @@ else {
         
         holoPos(I, O:pos() + vec( cos(X + I*500)*(D-40), -30, 70 + sin(Y + I*500)*(D-40) ):rotate(ang(0, O:angles():yaw()+-90, 0)))
         holoPos(I+B, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
-        holoPos(I+B2, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
-        holoPos(I+B3, holoEntity(I):pos() + vec(0, 0, 0):rotate(ang(0, O:angles():yaw()+-90, 0)))
         spinHolo()
         #holoPos(I, O:pos() + vec(cos(X + I*500)*D, sin(Y + I*500)*D, H+20 + I*10))
         
@@ -164,11 +136,59 @@ else {
 
 # Value increments for rotation based on M which is the distance it goes
 # So in other words speed, also Ma is ang speed
-U+=M+5
-V+=M+5
-W+=M+5
+# U+=M+5
+# V+=M+5
+# W+=M+5
 
 X+=M
 Y+=M
 Ax+=Ma
 Ay+=Ma
+
+
+#[
+# --------------------------------- #
+
+# ------ Keyboard conditions ------ #
+TranSize = 0.1
+
+function void transToBig() {
+    
+    if( S < 100 ) { S += 0.1 }
+        
+}
+
+function void transToSmall() {
+    
+    if( S > 100 ) { S -= 0.1 }
+        
+}
+
+if ( O:keyPressed("G") & CeilBool == 0 ) {
+    
+    CeilBool = 1
+        
+    holoModel(1, "cube")
+    holoPos(1, O:pos() + vec(0, 0, 70))
+    transToBig()
+
+}
+
+elseif ( O:keyPressed("R") & CeilBool == 1 ) {
+
+    CeilBool = 0
+    
+    holoModel(1, "icosphere3")
+    holoScale(1, vec(S, S, S))
+    transToSmall()
+    
+}
+
+
+]#
+
+
+
+
+
+

@@ -20,12 +20,12 @@ if (first()) {
         holoAlpha(1, 0)
         holoColor(1, vec(0, 0, 0))
         
-        holoPos(1, Dam:pos() + vec(0, 0, 150))
+        holoPos(1, Hans:pos() + vec(0, 0, 150))
         
         holoEntity(1):setTrails(500, 100, 0.5, "trails/physbeam", vec(random(255)+100, random(255)+100, random(255)+100), 255) 
     
 }
 
-Dam = findPlayerByName("Wavundyrei Alcaranar") 
+Hans = findPlayerByName("huxerion3551") 
 
-holoPos(1, Dam:pos() + vec(0, 0, 500))
+holoPos(1, Hans:pos() + vec(0, 0, 500))

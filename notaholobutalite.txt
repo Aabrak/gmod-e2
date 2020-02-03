@@ -1,0 +1,20 @@
+@name notAHoloButALite
+@inputs LightIncrement
+@outputs Red Green Blue RGB:vector Opos:vector Oang:angle Enable Strength
+@persist 
+@trigger
+
+Strength = 2000000
+
+if(first()){runOnTick(1) Red = random(255) Green = random(255) Blue = random(255)}
+
+Enable = 1
+
+if(Red<255){    Red+=2           } else{Red=1}
+if(Green<255){  Green+=2         } else{Green=1}
+if(Blue<255){   Blue+=2          } else{Blue=1}
+
+RGB = vec(LightIncrement*255, 0, 0)
+
+Opos = owner():pos()
+Oang = ang( vec( cos(Opos:x()), sin(Opos:y()), 0 ) )

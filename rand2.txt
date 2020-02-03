@@ -1,14 +1,25 @@
 @name rand2
-@inputs A
+@inputs A Target:entity Temp:vector
 @outputs
 @persist 
 @trigger 
 
-interval(100)
+
+
+if ( first() ) { 
+    runOnTick(1)
+    Temp = (vec(0, 0, 0))
+}
+
+if (owner():keyPressed("R")) {
+    # Target = findPlayerByName("huxerion3551") 
+}
+Target = findPlayerByName("Wavundyrei Alcaranar")
+Temp = Target:pos()
 
 Effect = effect()
 Effect:setScale(1)
 Effect:setMagnitude(1)
 Effect:setRadius(1)
-Effect:setOrigin(entity():pos())
-Effect:play("AR2Impact")
+Effect:setOrigin(Target:pos() + vec(0, 0, 30))
+Effect:play("explosion")
